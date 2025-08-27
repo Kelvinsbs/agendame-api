@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\UserRegistered;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\User\MeController;
@@ -16,5 +17,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 
 Route::post('email', function() {
-    Mail::to('test@test.com')->send(new WelcomeMail());
+    UserRegistered::dispatch();
+    // Mail::to('test@test.com')->send(new WelcomeMail());
 });
