@@ -15,8 +15,3 @@ Route::post('register', RegisterController::class);
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('me', [MeController::class, 'show']);
 });
-
-Route::post('email', function() {
-    UserRegistered::dispatch();
-    // Mail::to('test@test.com')->send(new WelcomeMail());
-});
