@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Http\Controllers\Auth;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\ForgotPasswordRequest;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
+class ForgotPasswordController extends Controller
+{
+    public function __invoke(ForgotPasswordRequest $request) {
+        $input = $request->validated();
+
+        $user = User::query()->whereEmail($input['email'])->first();
+
+        if (!$user) {
+            return 'Não tem usuario';
+        }
+
+        $user->resetPasswordTokens()->create([
+            'token' => Str::upper(Str::random(6)),
+            // 'expires_at' => now()->addMinutes(60),
+        ]);
+
+        dd($user->toArray());
+    }
+}
