@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Exceptions\UserNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ForgotPasswordRequest;
 use App\Models\User;
@@ -16,7 +17,7 @@ class ForgotPasswordController extends Controller
         $user = User::query()->whereEmail($input['email'])->first();
 
         if (!$user) {
-            return 'Não tem usuario';
+            throw new UserNotFoundException();
         }
 
         $user->resetPasswordTokens()->create([
