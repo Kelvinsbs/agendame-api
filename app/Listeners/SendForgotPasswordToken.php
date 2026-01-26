@@ -24,9 +24,7 @@ class SendForgotPasswordToken implements ShouldQueue
     {
         $user = $event->user;
         $token = $event->token;
-        // dd($user->mail);
         Mail::to($user->email)->send(new PasswordResetTokenMail($user, $token));
 
-        // dd($user->mail);
     }
 }

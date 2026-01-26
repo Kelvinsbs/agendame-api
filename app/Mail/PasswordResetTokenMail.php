@@ -37,7 +37,6 @@ class PasswordResetTokenMail extends Mailable
      */
     public function content(): Content
     {
-        dd('testte')
         return new Content(
             view: 'emails.password_token',
         );
