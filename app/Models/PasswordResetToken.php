@@ -10,4 +10,8 @@ class PasswordResetToken extends Model
     use HasFactory;
     const UPDATED_AT = null;
     protected $guarded = ['id'];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }
